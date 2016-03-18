@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['import'],
+  plugins: ['jobtalk'],
   rules: {
     'jobtalk/no-jquery-extend': 'warn'
   }
