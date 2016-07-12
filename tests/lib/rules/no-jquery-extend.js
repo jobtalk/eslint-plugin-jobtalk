@@ -22,7 +22,8 @@ ruleTester.run('no-jquery-extend', rule, {
 
   valid: [
     { code: 'Object.assign(objA, objB)' },
-    { code: '_.extend(objA, objB)' }
+    { code: '_.extend(objA, objB)' },
+    { code: '$.extend(true, objA, objB)' } // skip if deepMerge is true
   ],
 
   invalid: [
@@ -35,6 +36,13 @@ ruleTester.run('no-jquery-extend', rule, {
     },
     {
       code: 'jQuery.extend(objA, objB)',
+      errors: [{
+        message: 'Use Object.assign instead of jQuery.extend',
+        type: 'CallExpression'
+      }]
+    },
+    {
+      code: 'jQuery.extend({}, objA, objB)',
       errors: [{
         message: 'Use Object.assign instead of jQuery.extend',
         type: 'CallExpression'
